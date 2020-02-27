@@ -49,6 +49,9 @@ namespace RentalServices.Controllers
         }
 
         // Month can be defined as a byte since max value is 12
+        // NOTE: building custom routes is tedious and messy as a complex system will have a number of custom routes.
+        // Furthermore these definitions are set string values so if a name is changed for a controller it will not update here making this approach not modular.
+        // Instead of this we can use Attribute Routing
         // to apply constraint in attribute route we add ':' ten regex() which defines a regular expression and then the constraint
         // note we cant use verbatim since the regex parameter is not a string. Also we must escape (double up) special characters like { and } in regex
         // we can apply as many constraints as we want by appending new constraints with':' a list of all constraints can be found by: ASP.NET MVC Attribute Route Constraints

@@ -53,21 +53,17 @@ namespace RentalServices
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>
-            {
-                // NOTE: building custom routes is tedious and messy as a complex system will have a number of custom routes.
-                // Furthermore these definitions are set string values so if a name is changed for a controller it will not update here making this approach not modular.
-                // Instead of this we can use Attribute Routing
-                
+            {   
                 // order of route mapping matters as there is a prescedence hierarchy from most specific map routes to most generic (ie defaults)
                 // Essentially ASP.NET will check the url that matches the MapRoute description from top to bottom
                 // Custom route for sorting by release date
-                //routes.MapRoute(
-                //    name: "BooksByReleaseDate",
-                //    template: "books/released/{year}/{month}",
-                //    new { controller = "Books", action = "ByReleaseDate" },
-                //    // specifying router constraints (4 digits for year and 2 for month)
-                //    // @ specifies a verbatim string which means to ignore escape characters and take everything as a literal string and not an operation since \ is an escape sequence
-                //    new { year = @"\d{4}", month = @"\d{2}" });
+                routes.MapRoute(
+                    name: "BooksByReleaseDate",
+                    template: "books/released/{year}/{month}",
+                    new { controller = "Books", action = "ByReleaseDate" },
+                    // specifying router constraints (4 digits for year and 2 for month)
+                    // @ specifies a verbatim string which means to ignore escape characters and take everything as a literal string and not an operation since \ is an escape sequence
+                    new { year = @"\d{4}", month = @"\d{2}" });
 
                 routes.MapRoute(
                     name: "default",
