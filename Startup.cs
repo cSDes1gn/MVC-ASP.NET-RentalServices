@@ -56,6 +56,7 @@ namespace RentalServices
             {
                 routes.MapRoute(
                     name: "default",
+                    // Defaults defined in template
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
