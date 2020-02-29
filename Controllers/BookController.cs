@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RentalServices.Models;
-using RentalServices.ViewModels;
 
 namespace RentalServices.Controllers
 {
@@ -37,21 +36,11 @@ namespace RentalServices.Controllers
         //Movies
 
         // 'int?' makes the parameter nullible (optional)
-        public IActionResult Index(int? pageIndex, string sortBy)
+        public IActionResult Index()
         {
-            // Create book list from Models to pass into ViewModels list
-            var books = new List<Book>
-            {
-                new Book {Name = "Mathematics of Machine Learning" },
-                new Book {Name = "赤チャート"}
-            };
+            var books = GetBooks();
 
-            var viewModel = new BookViewModel
-            {
-                Book = books
-            };
-
-            return View(viewModel);
+            return View(books);
             // if optional pageIndex is empty then set it to default (1)
             //if (!pageIndex.HasValue)
             //    pageIndex = 1;
@@ -75,6 +64,15 @@ namespace RentalServices.Controllers
         public IActionResult ByReleaseDate(int year, byte month)
         {
             return Content(year + "/" + month);
+        }
+
+        private IEnumerable<Book> GetBooks()
+        {
+            return new List<Book>
+            {
+                new Book { Id = 1, Name = "Mathematics of Machine Learning" },
+                new Book { Id = 2, Name = "赤チャート" }
+            };
         }
 
 

@@ -1,4 +1,4 @@
-﻿@model RentalServices.ViewModels.CustomerViewModel
+﻿@model IEnumerable<RentalServices.Models.Customer>
 @{
     ViewData["Title"] = "Active Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <h2>Active Customers</h2>
 
-@if (Model.Customers.Count == 0)
+@if (!Model.Any())
 {
     <text>We do not have any customers at this time.</text>
 }
@@ -16,10 +16,10 @@ else
         <tr>
             <th>Customer</th>
         </tr>
-        @foreach (var customer in Model.Customers)
+        @foreach (var customer in Model)
         {
             <tr>
-                <td>@customer.Name</td>
+                <td>@Html.ActionLink(customer.Name, "Details","Customer",new { id = customer.Id }, null)</td>
             </tr>
         }
     </table>

@@ -1,5 +1,5 @@
-﻿@model RentalServices.ViewModels.BookViewModel
-@{
+﻿@model IEnumerable<RentalServices.Models.Book>
+@{     
     ViewData["Title"] = "Available Books";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -11,7 +11,7 @@
 
 <h2>Available Books</h2>
 
-@if (Model.Book.Count == 0)
+@if (!Model.Any())
 {
     <text>No books in stock.</text>
 }
@@ -21,7 +21,7 @@ else
         <tr>
             <th>Book</th>
         </tr>
-        @foreach (var book in Model.Book)
+        @foreach (var book in Model)
         {
             <tr>
                 <td>@book.Name</td>

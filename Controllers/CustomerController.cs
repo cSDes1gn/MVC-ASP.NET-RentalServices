@@ -4,25 +4,33 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RentalServices.Models;
-using RentalServices.ViewModels;
 
 namespace RentalServices.Controllers
 {
     public class CustomerController : Controller
     {
+
         public IActionResult Index()
         {
-            var customers = new List<Customer>
-            {
-                new Customer {Name = "Steven"},
-                new Customer {Name = "Aaron"}
-            };
+            var customers = GetCustomers();
+            return View(customers);
+        }
 
-            var viewModel = new CustomerViewModel
+        public IActionResult Details(int id)
+        {
+            var customer = GetCustomers().SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+                return NotFound();
+            return View(customer);
+        }
+
+        private IEnumerable<Customer> GetCustomers()
+        {
+            return new List<Customer>
             {
-                Customers = customers
+                new Customer { Id = 1, Name = "Steven" },
+                new Customer { Id = 2, Name = "Aaron" }
             };
-            return View(viewModel);
         }
     }
 }
