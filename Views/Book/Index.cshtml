@@ -1,0 +1,33 @@
+﻿@model RentalServices.ViewModels.BookViewModel
+@{
+    ViewData["Title"] = "Available Books";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*
+    Rendering customer list using Razor Views    
+*@
+
+
+<h2>Available Books</h2>
+
+@if (Model.Book.Count == 0)
+{
+    <text>No books in stock.</text>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>Book</th>
+        </tr>
+        @foreach (var book in Model.Book)
+        {
+            <tr>
+                <td>@book.Name</td>
+            </tr>
+        }
+    </table>
+}
+
+
