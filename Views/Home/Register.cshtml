@@ -1,4 +1,4 @@
-﻿
+﻿@model RentalServices.Models.Customer
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,13 +6,20 @@
 
 <h2>Register</h2>
 
+@{ 
+    // Using Razor Views we can have dynamic data attributes from our customer model used and updated in the form
+    // => is a lambda expression? functional programming!
+}
+
+@Html.AntiForgeryToken()
 <form class="form-horizontal">
     <fieldset>
         <legend>Registration Information Form</legend>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger"})
         <div class="form-group">
-            <label for="inputName" class="col-lg-2 control-label">Name</label>
+            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class ="col-lg-2 control-label"})
             <div class="col-lg-10">
-                <input type="text" class="form-control" id="inputName" placeholder="Name">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new {@type = "text", @class = "form-control", @placeholder="Customer ID"} })
             </div>
         </div>
         <div class="form-group">
